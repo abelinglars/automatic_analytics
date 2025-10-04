@@ -8,6 +8,7 @@
 - [x] choose data management approach
 - [x] design layers
 ### Step 3 Initialize Project
+- [x] choose naming conventions
 - [ ] create snowflake db
 - [ ] create E function
 - [ ] get snowflake auth info and store in env
@@ -15,7 +16,6 @@
 - [ ] create dbt project
 - [ ] concretize tasks
 - [ ] create staging layer tables
-- [ ] choose naming conventions
 - [ ]
 - [ ]
 

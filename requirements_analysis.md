@@ -14,6 +14,7 @@
 - rebuild churn model when data updates and package model into a docker container
 - store model specs with mlflow
 
+# BI/Reporting
 - give insights into customer behavior
 - product performance
 - sales trends
