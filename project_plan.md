@@ -9,20 +9,19 @@
 - [x] design layers
 ### Step 3 Initialize Project
 - [x] choose naming conventions
-- [ ] create snowflake db
-- [ ] create E function
-- [ ] get snowflake auth info and store in env
-- [ ] load data into snowflake
-- [ ] create dbt project
+- [x] create snowflake db
+- [x] create E function
+- [x] get snowflake auth info and store in env
+- [x] load data into snowflake
+- [x] create dbt project
 - [ ] concretize tasks
 - [ ] create staging layer tables
-- [ ]
 - [ ]
 
 ### Step 4 create bronze layer
 - [ ] analyze source system
 - [ ] coding data ingestion
-- [ ] creating completenes and schema checks
+- [ ] creating completeness and schema checks
 - [ ] commit
 ### Step 5 create silver layer
 - [ ] 
