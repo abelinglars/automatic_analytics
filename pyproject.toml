@@ -10,4 +10,5 @@ dependencies = [
     "dbt-core>=1.10.13",
     "dbt-snowflake>=1.10.2",
     "pandas>=2.3.3",
+    "snowflake-connector-python>=3.17.4",
 ]
