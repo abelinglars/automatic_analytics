@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: bronze_crm__customer_info
+    columns:
+      - name: customer_id
+        data_tests:
+          - not_null
+          - unique
+      - name: marital_status
+        data_tests:
+          - accepted_values: 
+              arguments:
+                values: ['married', 'single', 'n/a']
+      - name: gender
+        data_tests:
+          - accepted_values: 
+              arguments:
+                values: ['female', 'male', 'n/a']
