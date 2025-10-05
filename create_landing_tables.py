@@ -25,10 +25,10 @@ creation_statements = {
             prd_id INTEGER,
             prd_key TEXT,
             prd_nm TEXT,
-            prd_cost TEXT,
+            prd_cost INTEGER,
             prd_line TEXT,
-            prd_start_dt TEXT,
-            prd_end_dt TEXT
+            prd_start_dt DATE,
+            prd_end_dt DATE
     );
     """,
     sales_details: f"""
@@ -47,7 +47,7 @@ creation_statements = {
     cust_az12: f"""
     CREATE OR REPLACE TABLE erp_{cust_az12} (
             CID TEXT,
-            BDATE TEXT,
+            BDATE DATE,
             GEN TEXT
     );
     """,
