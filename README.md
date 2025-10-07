@@ -28,3 +28,5 @@ Transformation: Performed using dbt models to handle data quality, standardizati
 Purpose: Curated, business-ready data for analytics and reporting.
 Modeling: Star schema with fact and dimension tables optimized for BI tools and SQL analysis.
 
+## Model flow with dbt models as dagster assets
+![Data Flow using dbt models in dagster](model_flow_materializing.png)
