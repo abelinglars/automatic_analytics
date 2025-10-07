@@ -4,6 +4,9 @@ This project showcases an end-to-end modern data engineering workflow — from r
 ## Model flow with dbt models as dagster assets
 ![Data Flow using dbt models in dagster](model_flow_materializing.png)
 
+## Model flow with dbt models as dagster assets
+![Data Flow using dbt models in dagster](model_flow_materializing.png)
+
 ## Motivation & Learning Outcomes
 
 I created this project to deepen my understanding of modern data engineering practices and gain a overview of the end-to-end data lifecycle — from raw data ingestion to analytics-ready insights. My main goal was to learn how to use dbt for modular, testable and version controlled data transformations, explore workflow orchestration with Dagster, and strengthen my skills in data modeling. 
@@ -31,5 +34,3 @@ Transformation: Performed using dbt models to handle data quality, standardizati
 Purpose: Curated, business-ready data for analytics and reporting.
 Modeling: Star schema with fact and dimension tables optimized for BI tools and SQL analysis.
 
-## Model flow with dbt models as dagster assets
-![Data Flow using dbt models in dagster](model_flow_materializing.png)
