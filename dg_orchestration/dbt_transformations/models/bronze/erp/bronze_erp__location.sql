@@ -11,7 +11,7 @@ final as (
 		replace(CID, '-', '') as customer_id,
 		case 
 			when trim(upper(CNTRY)) = 'DE' then 'Germany'
-			when trim(upper(CNTRY)) in ('US', 'USA') then 'United states'
+			when trim(upper(CNTRY)) in ('US', 'USA') then 'United States'
 			when trim(upper(CNTRY)) = '' or CNTRY is null then 'n/a'
 			else trim(CNTRY)
 		end as country,

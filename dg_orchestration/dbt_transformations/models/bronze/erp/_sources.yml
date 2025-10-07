@@ -8,15 +8,33 @@ sources:
       - name: erp_cust_az12
         columns:
           - name: CID
+            data_tests:
+              - not_null:
+                  config:
+                    severity: warn
           - name: BDATE
           - name: GEN
       - name: erp_loc_a101
         columns:
           - name: CNTRY
           - name: CID
+            data_tests:
+              - not_null:
+                  config:
+                    severity: warn
+              - unique:
+                  config:
+                    severity: warn
       - name: erp_px_cat_g1v2
         columns:
           - name: ID
+            data_tests:
+              - not_null:
+                  config:
+                    severity: warn
+              - unique:
+                  config:
+                    severity: warn
           - name: CAT
           - name: SUBCAT
           - name: MAINTENANCE

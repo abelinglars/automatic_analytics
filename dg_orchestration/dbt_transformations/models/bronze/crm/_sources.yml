@@ -16,6 +16,13 @@ sources:
                   config:
                     severity: warn
           - name: cst_key
+            data_tests:
+              - not_null:
+                  config:
+                    severity: warn
+              - unique:
+                  config:
+                    severity: warn
           - name: cst_firstname
           - name: cst_lastname
           - name: cst_marital_status
@@ -24,7 +31,21 @@ sources:
       - name: crm_prd_info
         columns:
           - name: prd_id
+            data_tests:
+              - not_null:
+                  config:
+                    severity: warn
+              - unique:
+                  config:
+                    severity: warn
           - name: prd_key
+            data_tests:
+              - not_null:
+                  config:
+                    severity: warn
+              - unique:
+                  config:
+                    severity: warn
           - name: prd_nm
           - name: prd_cost
           - name: prd_line
