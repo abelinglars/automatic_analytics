@@ -1,11 +1,9 @@
 # Modern Data Warehouse & Analytics Project
-This project showcases an end-to-end modern data engineering workflow — from raw data ingestion to analytics-ready data models and insights — using Snowflake, dbt, and Dagster.
+This project showcases an end-to-end modern data engineering workflow — from raw data ingestion to analytics-ready data models and insights — using **Snowflake**, **dbt**, and **Dagster**.
 
-## Model flow with dbt models as dagster assets
-![Data Flow using dbt models in dagster](model_flow_materializing.png)
+## Overview
+![Project Overview](project_overview.png)
 
-## Model flow with dbt models as dagster assets
-![Data Flow using dbt models in dagster](model_flow_materializing.png)
 
 ## Motivation & Learning Outcomes
 
@@ -18,19 +16,10 @@ This project delivers that solution by implementing a cloud-based data warehouse
 
 The result is a centralized, automated, and analytics-ready data environment that enables faster, more reliable insights into customer behavior, product performance, and sales trends.
 
+
 ## Data Architecture
 
 The project follows the Medallion Architecture pattern — a layered data architecture for building scalable and maintainable analytics systems.
 
-### Bronze Layer
-Data Source: CSV files representing ERP and CRM datasets
-Ingestion: Automated pipelines load raw data into Snowflake staging tables using Dagster. Imports data 'as is'
-
-### Silver Layer
-Purpose: Cleanse, standardize, and integrate data 
-Transformation: Performed using dbt models to handle data quality, standardization and enrichment
-
-### Gold Layer
-Purpose: Curated, business-ready data for analytics and reporting.
-Modeling: Star schema with fact and dimension tables optimized for BI tools and SQL analysis.
+![Data Flow using dbt models in dagster](model_flow_materializing.png)
 
