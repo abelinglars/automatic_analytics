@@ -2,7 +2,7 @@
 This project showcases an end-to-end modern data engineering workflow — from raw data ingestion to analytics-ready data models and insights — using **Snowflake**, **dbt**, and **Dagster**.
 
 ## Overview
-![Project Overview](project_overview.png)
+![Project Overview](assets/project_overview.png)
 
 
 ## Motivation & Learning Outcomes
@@ -21,5 +21,5 @@ The result is a centralized, automated, and analytics-ready data environment tha
 
 The project follows the Medallion Architecture pattern — a layered data architecture for building scalable and maintainable analytics systems.
 
-![Data Flow using dbt models in dagster](model_flow_materializing.png)
+![Data Flow using dbt models in dagster](assets/model_flow_materializing.png)
 
