@@ -7,6 +7,8 @@ wheels/
 *.egg-info
 data/
 
+.DS_Store
+
 .env
 
 # dbt
@@ -17,3 +19,4 @@ dbt_packages/
 
 # Virtual environments
 .venv
+.Rproj.user
