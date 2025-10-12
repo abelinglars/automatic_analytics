@@ -10,6 +10,9 @@ data/
 .DS_Store
 
 .env
+.Rhistory
+*files/
+.user*
 
 # dbt
 logs/
