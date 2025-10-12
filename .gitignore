@@ -9,6 +9,9 @@ data/
 .tmp*
 .DS_Store
 
+*.html
+*.pdf
+
 .env
 .Rhistory
 *files/
