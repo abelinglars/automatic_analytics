@@ -1,9 +1,6 @@
 version: 2
 
 sources:
-  - name: dagster
-    tables:
-      - name: crm_cust_info
   - name: crm
     database: WAREHOUSE
     schema: INGEST

@@ -1,7 +1,7 @@
 select 
-	crm_product.product_id,
+	crm_product.product_id as product_id,
 	row_number() over(order by crm_product.start_date, crm_product.product_key) as product_surrogate,
-	crm_product.product_category as category_key,
+	crm_product.product_category,
 	crm_product.product_key,
 	crm_product.name,
 	crm_product.cost,

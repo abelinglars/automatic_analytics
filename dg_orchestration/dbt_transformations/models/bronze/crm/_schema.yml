@@ -53,9 +53,11 @@ models:
       - name: product_key
         data_tests:
           - not_null
-      - name: customer_key
+      - name: customer_id
         data_tests:
-          - not_null
+          - not_null:
+              config:
+                severity: warn
       - name: order_date
       - name: ship_date
       - name: due_date

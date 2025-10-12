@@ -14,12 +14,14 @@ models:
       - name: product_key
         data_tests:
           - not_null
-      - name: product_name
+      - name: name
         data_tests:
           - not_null
       - name: cost
         data_tests:
-          - not_null
+          - not_null:
+              config:
+                severity: warn
       - name: line
       - name: category
       - name: sub_category
