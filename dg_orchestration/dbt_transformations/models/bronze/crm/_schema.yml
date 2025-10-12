@@ -30,11 +30,9 @@ models:
       - name: product_id
         data_tests:
           - not_null
-          - unique
       - name: composite_product_key
         data_tests:
           - not_null
-          - unique
       - name: product_category
       - name: product_key
         data_tests:

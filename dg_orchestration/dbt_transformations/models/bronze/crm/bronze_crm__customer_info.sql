@@ -1,7 +1,7 @@
 with source as (
 
 	select * 
-	from {{ source('crm', 'crm_cust_info') }}
+	from {{ source('dagster', 'crm_cust_info') }}
 
 ),
 

@@ -1,0 +1,54 @@
+version: 2
+
+models:
+  - name: dim_products
+    columns:
+      - name: product_id
+        data_tests:
+          - not_null
+          - unique
+      - name: product_surrogate
+        data_tests:
+          - not_null
+          - unique
+      - name: product_key
+        data_tests:
+          - not_null
+      - name: product_name
+        data_tests:
+          - not_null
+      - name: cost
+        data_tests:
+          - not_null
+      - name: line
+      - name: category
+      - name: sub_category
+      - name: maintenance
+  - name: dim_customers
+    columns:
+      - name: customer_id
+        data_tests:
+          - not_null
+          - unique
+      - name: customer_surrogate
+        data_tests:
+          - not_null
+          - unique
+      - name: customer_key
+        data_tests:
+          - not_null
+      - name: first_name
+      - name: last_name
+      - name: gender
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['female', 'male', 'n/a']
+      - name: country
+      - name: marital_status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['single', 'married', 'n/a']
+      - name: birthday
+      - name: create_date

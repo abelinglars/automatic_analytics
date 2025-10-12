@@ -1,0 +1,37 @@
+version: 2
+
+models:
+  - name: bronze_erp__location
+    columns:
+      - name: customer_id
+        data_tests:
+          - unique
+          - not_null
+      - name: country
+      - name: dwh_created_at
+  - name: bronze_erp__customer_info
+    columns:
+      - name: customer_id
+        data_tests:
+          - not_null
+          - unique
+      - name: birthday
+      - name: gender
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['female', 'male', 'n/a']
+      - name: birthday
+      - name: dwh_created_at
+  - name: bronze_erp__product_category
+    columns:
+      - name: id
+        data_tests:
+          - not_null
+          - unique
+      - name: category
+      - name: sub_category
+      - name: maintenance
+      - name: dwh_created_at
+
+
