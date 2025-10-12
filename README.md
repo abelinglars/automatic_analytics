@@ -42,6 +42,12 @@ The project follows the Medallion Architecture pattern — a layered data archit
 
 ![Data Flow using dbt models in dagster](assets/model_flow_materializing.png)
 
+## Improvements
+Improvements that could be made for this project:
+- wrap the dagster process in a container
+- adapt the execution of python jobs to run outside dagsters environment
+- create dagster resources for the input and output file locations
+- read the source data from an API or database
 
 ## Acknowledgements
 The data and inspiration for this project comes from this [repository](https://github.com/DataWithBaraa/sql-data-warehouse-project) and I adapted it to use dbt instead of raw sql, choose snowflake as datawarehouse solution and dagster to orchestrate and schedule the execution of the jobs.
