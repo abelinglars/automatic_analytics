@@ -1,0 +1,158 @@
+---
+title: "Monthly Sales Report"
+format: 
+  html:
+    toc: true
+params:
+  month: "2012-09"
+execute:
+  echo: false
+  warning: false
+---
+
+```{python}
+#| label: setup
+from pathlib import Path
+import snowflake.connector
+import os
+import datetime as dt
+
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+import matplotlib.ticker as mticker
+
+pd.options.display.max_columns = None
+
+def get_db_connection():
+    return snowflake.connector.connect(
+        user=os.environ["SNOWFLAKE_USERNAME"],
+        password=os.environ["SNOWFLAKE_PASSWORD"],
+        account=os.environ["SNOWFLAKE_ACCOUNT_ID"],
+        warehouse=os.environ["WAREHOUSE"],
+        database=os.environ["DATABASE"],
+        schema=os.environ["SCHEMA"],
+    )
+
+# --- Setup ---
+month = "2012-09"
+report_month = pd.to_datetime(month)
+start_date = report_month.replace(day=1).date()
+end_date = (start_date + pd.offsets.MonthEnd(0))
+
+sns.set_theme(style="whitegrid")
+
+def fetch_dataframe(query, params=None):
+    with get_db_connection() as conn:
+        df = pd.read_sql(query, conn, params=params)
+    return df
+```
+
+## Executive Summary
+---
+
+```{python}
+#| label: kpi-summary
+query_kpis = """
+WITH base AS (
+    SELECT 
+        DATE_TRUNC('month', order_date) AS month,
+        SUM(sales) AS total_sales,
+        SUM(quantity) AS total_quantity,
+        COUNT(DISTINCT order_number) AS total_orders,
+        COUNT(DISTINCT customer_key) AS unique_customers
+    FROM fct_sales
+    GROUP BY 1
+)
+SELECT 
+    month,
+    total_sales,
+    total_quantity,
+    total_orders,
+    unique_customers,
+    total_sales / total_orders AS avg_order_value,
+    LAG(total_sales) OVER(ORDER BY month) AS prev_sales,
+    (total_sales - LAG(total_sales) OVER(ORDER BY month)) / NULLIF(LAG(total_sales) OVER(ORDER BY month), 0) * 100 AS sales_growth_mom
+FROM base
+ORDER BY month;
+"""
+df_kpis = fetch_dataframe(query_kpis)
+current = df_kpis.loc[df_kpis["MONTH"] == start_date]
+
+display_kpis = {
+    "total_sales": f"{current["TOTAL_SALES"].values[0]:,.0f}",
+    "total_orders": f"{int(current["TOTAL_ORDERS"].values[0])}",
+    "unique_customers": f"{int(current["UNIQUE_CUSTOMERS"].values[0])}",
+    "avg_order_value": f"{current["AVG_ORDER_VALUE"].values[0]:,.2f}",
+    "mom_growth": f"{current["SALES_GROWTH_MOM"].values[0]:,.1f}"
+}
+
+#for k, v in display_kpis.items():
+#    print(f"{k}: {v:,.2f}")
+```
+In **`{python} start_date.strftime('%B %Y')`**, total sales reached $ **`{python} display_kpis['total_sales']`**, 
+generated from **`{python} int(display_kpis['total_orders'])` orders** placed by **`{python} int(display_kpis['unique_customers'])` customers**.  
+The **average order value** was $ **`{python} display_kpis['avg_order_value']`**, 
+reflecting a **`{python} display_kpis['mom_growth']`%** change compared to the previous month.
+
+## Sales Overview
+---
+
+### __Monthly Sales Trend__
+```{python}
+#| label: monthly-sales-trend
+def millions(x, pos):
+    return f'{x*1e-6:,.1f}M'
+plt.figure(figsize=(10,5))
+ax = sns.lineplot(data=df_kpis, x="MONTH", y="TOTAL_SALES", marker="o")
+ax.axvline(x=start_date, color="red", linestyle="--", lw=2, label=f"{start_date.strftime('%b %Y')}")  # highlight current month
+ax.yaxis.set_major_formatter(mticker.FuncFormatter(millions))
+plt.title("Monthly Total Sales")
+plt.xlabel("")
+plt.ylabel("Sales in Euro")
+plt.show()
+```
+
+### __Average Order Value Trend__
+```{python}
+#| label: aov-trend
+plt.figure(figsize=(10,5))
+ax = sns.lineplot(data=df_kpis, x="MONTH", y="AVG_ORDER_VALUE", marker="o", color="orange")
+ax.axvline(x=start_date, color="red", linestyle="--", lw=2, label=f"{start_date.strftime('%b %Y')}")  # highlight current month
+plt.title("Average Order Value Over Time")
+plt.xlabel("Month")
+plt.ylabel("Average Order Value in Euro")
+plt.show()
+```
+
+### __Product Performance__
+```{python}
+#| label: top-products
+query_top_products = """
+SELECT
+    p.name,
+    p.category,
+    SUM(f.sales) AS total_sales,
+    SUM(f.quantity) AS total_quantity
+FROM fct_sales f
+JOIN dim_products p ON f.product_key = p.product_surrogate
+WHERE DATE_TRUNC('month', f.order_date) = %(month)s
+GROUP BY p.name, p.category
+ORDER BY total_sales DESC
+LIMIT 20;
+"""
+
+df_products = fetch_dataframe(query_top_products, params={"month": start_date})
+```
+
+```{python}
+#| label: top-products-plot
+plt.figure(figsize=(10,6))
+sns.barplot(data=df_products, y="NAME", x="TOTAL_SALES", hue="CATEGORY", dodge=False)
+plt.title("Top 20 Products by Sales")
+plt.xlabel("Total Sales in Euro")
+plt.ylabel("Product Name")
+plt.legend(title="Category")
+plt.show()
+```
+
